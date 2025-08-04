@@ -1,21 +1,51 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Casier judiciaire</title>
   <style>
-    body { font-family: Arial, sans-serif; padding: 20px; }
-    input, button { margin: 5px; }
-    .entry { padding: 10px; border-bottom: 1px solid #ccc; }
+    body {
+      font-family: Arial, sans-serif;
+      padding: 20px;
+      background: #f0f2f5;
+    }
+    h1 {
+      color: #2c3e50;
+    }
+    input, select, button {
+      margin: 5px;
+      padding: 8px;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+    }
+    button {
+      background-color: #3498db;
+      color: white;
+      cursor: pointer;
+    }
+    .entry {
+      background: white;
+      border-radius: 8px;
+      padding: 10px;
+      margin-bottom: 10px;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
   </style>
 </head>
 <body>
   <h1>Casier judiciaire</h1>
   <div>
-    <input type="text" id="nom" placeholder="Nom" />
-    <input type="text" id="crime" placeholder="Crime" />
-    <input type="date" id="date" />
+    <input type="text" id="nom" placeholder="Nom du joueur">
+    <input type="text" id="infraction" placeholder="Infraction">
+    <select id="sanction">
+      <option value="Amende">Amende</option>
+      <option value="Arrestation">Arrestation</option>
+      <option value="Avertissement">Avertissement</option>
+      <option value="Ticket">Ticket</option>
+    </select>
+    <input type="number" id="montant" placeholder="Montant (si amende ou ticket)">
+    <input type="date" id="date">
     <button onclick="ajouterCasier()">Ajouter</button>
   </div>
   <div id="casier-list"></div>
