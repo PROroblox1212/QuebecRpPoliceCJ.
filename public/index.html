@@ -1,1 +1,32 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Casier Judiciaire</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <h1>Casier Judiciaire</h1>
 
+  <form id="addForm">
+    <input type="text" id="nom" placeholder="Nom complet" required>
+    <input type="text" id="infraction" placeholder="Infraction" required>
+    <button type="submit">Ajouter</button>
+  </form>
+
+  <table id="casiersTable">
+    <thead>
+      <tr>
+        <th>Nom</th>
+        <th>Infraction</th>
+        <th>Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      <!-- Casiers ajoutés ici dynamiquement -->
+    </tbody>
+  </table>
+
+  <script src="script.js"></script>
+</body>
+</html>
