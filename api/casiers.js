@@ -1,36 +1,22 @@
-let casiers = [
-  {
-    id: 1,
-    nom: "Alex B",
-    infraction: "Excès de vitesse",
-    sanction: "Amende",
-    montant: 250,
-    date: "2025-08-04"
-  },
-  {
-    id: 2,
-    nom: "Marie C",
-    infraction: "Intrusion",
-    sanction: "Arrestation",
-    montant: null,
-    date: "2025-08-01"
-  }
-];
+import fs from 'fs';
+import path from 'path';
+
+const dataFile = path.join(process.cwd(), 'data', 'casiers.json');
 
 export default function handler(req, res) {
   if (req.method === 'GET') {
-    res.status(200).json(casiers);
+    const data = JSON.parse(fs.readFileSync(dataFile, 'utf-8'));
+    res.status(200).json(data.slice(-5).reverse());
   } else if (req.method === 'POST') {
     let body = '';
-    req.on('data', chunk => {
-      body += chunk;
-    });
+    req.on('data', chunk => { body += chunk; });
     req.on('end', () => {
-      const nouveauCasier = JSON.parse(body);
-      nouveauCasier.id = casiers.length + 1;
-      casiers.unshift(nouveauCasier); // Ajoute au début
-      if (casiers.length > 5) casiers.pop(); // Garde que 5 derniers
-      res.status(201).json({ success: true, casier: nouveauCasier });
+      const nouveau = JSON.parse(body);
+      const data = JSON.parse(fs.readFileSync(dataFile, 'utf-8'));
+      nouveau.id = data.length + 1;
+      data.push(nouveau);
+      fs.writeFileSync(dataFile, JSON.stringify(data, null, 2));
+      res.status(201).json({ success: true, casier: nouveau });
     });
   } else {
     res.status(405).end();
