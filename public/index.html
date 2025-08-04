@@ -2,30 +2,23 @@
 <html lang="fr">
 <head>
   <meta charset="UTF-8">
-  <title>Casier Judiciaire</title>
-  <link rel="stylesheet" href="style.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Casier judiciaire</title>
+  <style>
+    body { font-family: Arial, sans-serif; padding: 20px; }
+    input, button { margin: 5px; }
+    .entry { padding: 10px; border-bottom: 1px solid #ccc; }
+  </style>
 </head>
 <body>
-  <h1>Casier Judiciaire</h1>
-
-  <form id="addForm">
-    <input type="text" id="nom" placeholder="Nom complet" required>
-    <input type="text" id="infraction" placeholder="Infraction" required>
-    <button type="submit">Ajouter</button>
-  </form>
-
-  <table id="casiersTable">
-    <thead>
-      <tr>
-        <th>Nom</th>
-        <th>Infraction</th>
-        <th>Action</th>
-      </tr>
-    </thead>
-    <tbody>
-      <!-- Casiers ajoutés ici dynamiquement -->
-    </tbody>
-  </table>
+  <h1>Casier judiciaire</h1>
+  <div>
+    <input type="text" id="nom" placeholder="Nom">
+    <input type="text" id="crime" placeholder="Crime">
+    <input type="date" id="date">
+    <button onclick="ajouterCasier()">Ajouter</button>
+  </div>
+  <div id="casier-list"></div>
 
   <script src="script.js"></script>
 </body>
