@@ -1,38 +1,39 @@
-async function loadCasiers() {
-  const res = await fetch('/api/casiers');
-  const casiers = await res.json();
-  const tbody = document.querySelector('#casiersTable tbody');
-  tbody.innerHTML = '';
-  casiers.forEach((casier, index) => {
-    const row = document.createElement('tr');
-    row.innerHTML = `
-      <td>${casier.nom}</td>
-      <td>${casier.infraction}</td>
-      <td><button onclick="deleteCasier(${index})">Supprimer</button></td>
-    `;
-    tbody.appendChild(row);
-  });
+function chargerCasiers() {
+  fetch("/api/casiers")
+    .then(res => res.json())
+    .then(data => {
+      const container = document.getElementById("casier-list");
+      container.innerHTML = "";
+      data.forEach(entry => {
+        const div = document.createElement("div");
+        div.className = "entry";
+        div.textContent = `${entry.nom} - ${entry.crime} (${entry.date})`;
+        container.appendChild(div);
+      });
+    })
+    .catch(err => {
+      console.error("Erreur de chargement:", err);
+    });
 }
 
-async function deleteCasier(index) {
-  await fetch(`/api/casiers/${index}`, { method: 'DELETE' });
-  loadCasiers();
+function ajouterCasier() {
+  const nom = document.getElementById("nom").value;
+  const crime = document.getElementById("crime").value;
+  const date = document.getElementById("date").value;
+
+  if (!nom || !crime || !date) return alert("Remplis tous les champs");
+
+  fetch("/api/casiers", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ nom, crime, date })
+  })
+    .then(res => res.json())
+    .then(() => {
+      chargerCasiers();
+    })
+    .catch(err => console.error("Erreur ajout:", err));
 }
 
-document.getElementById('addForm').addEventListener('submit', async (e) => {
-  e.preventDefault();
-  const nom = document.getElementById('nom').value;
-  const infraction = document.getElementById('infraction').value;
-
-  await fetch('/api/casiers', {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ nom, infraction }),
-  });
-
-  document.getElementById('nom').value = '';
-  document.getElementById('infraction').value = '';
-  loadCasiers();
-});
-
-loadCasiers();
+// Charger les casiers au démarrage
+document.addEventListener("DOMContentLoaded", chargerCasiers);
