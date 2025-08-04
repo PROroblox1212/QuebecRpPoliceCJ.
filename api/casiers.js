@@ -1,6 +1,20 @@
 let casiers = [
-  { id: 1, nom: "Alex B", crime: "Vol de voiture", date: "2025-08-04" },
-  { id: 2, nom: "Marie C", crime: "Intrusion", date: "2025-08-01" }
+  {
+    id: 1,
+    nom: "Alex B",
+    infraction: "Excès de vitesse",
+    sanction: "Amende",
+    montant: 250,
+    date: "2025-08-04"
+  },
+  {
+    id: 2,
+    nom: "Marie C",
+    infraction: "Intrusion",
+    sanction: "Arrestation",
+    montant: null,
+    date: "2025-08-01"
+  }
 ];
 
 export default function handler(req, res) {
