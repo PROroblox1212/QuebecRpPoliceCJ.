@@ -1,1 +1,8 @@
-
+[{
+  "id": 1,
+  "nom": "Alex B",
+  "infraction": "Excès de vitesse",
+  "sanction": "Amende",
+  "montant": 250,
+  "date": "2025-08-04"
+}]
