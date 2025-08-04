@@ -3,52 +3,39 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Casier judiciaire</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      padding: 20px;
-      background: #f0f2f5;
-    }
-    h1 {
-      color: #2c3e50;
-    }
-    input, select, button {
-      margin: 5px;
-      padding: 8px;
-      border-radius: 5px;
-      border: 1px solid #ccc;
-    }
-    button {
-      background-color: #3498db;
-      color: white;
-      cursor: pointer;
-    }
-    .entry {
-      background: white;
-      border-radius: 8px;
-      padding: 10px;
-      margin-bottom: 10px;
-      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-    }
-  </style>
+  <title>Casier Judiciaire Tool</title>
+  <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-  <h1>Casier judiciaire</h1>
-  <div>
-    <input type="text" id="nom" placeholder="Nom du joueur">
-    <input type="text" id="infraction" placeholder="Infraction">
-    <select id="sanction">
-      <option value="Amende">Amende</option>
-      <option value="Arrestation">Arrestation</option>
-      <option value="Avertissement">Avertissement</option>
-      <option value="Ticket">Ticket</option>
-    </select>
-    <input type="number" id="montant" placeholder="Montant (si amende ou ticket)">
-    <input type="date" id="date">
-    <button onclick="ajouterCasier()">Ajouter</button>
+  <nav class="navbar">
+    <h1>Casier Judiciaire Tool</h1>
+    <ul class="nav-links">
+      <li onclick="afficherSection('home')">Accueil</li>
+      <li onclick="afficherSection('casiers')">Casiers Judiciaires</li>
+      <li onclick="afficherSection('info')">Info</li>
+      <li onclick="afficherSection('credits')">Crédits</li>
+    </ul>
+  </nav>
+
+  <div id="home" class="section active">
+    <h2>Bienvenue sur l'outil de consultation judiciaire</h2>
+    <p>Utilisez le menu pour accéder aux différentes fonctionnalités.</p>
   </div>
-  <div id="casier-list"></div>
+
+  <div id="casiers" class="section">
+    <input type="text" id="search" placeholder="Rechercher un nom..." oninput="filtrerCasiers()">
+    <div id="casier-list" class="casier-list"></div>
+  </div>
+
+  <div id="info" class="section">
+    <h2>Informations</h2>
+    <p>Ce système permet aux forces de l'ordre de consulter les casiers judiciaires récents avec une interface moderne.</p>
+  </div>
+
+  <div id="credits" class="section">
+    <h2>Crédits</h2>
+    <p>Développé par Alexis avec l’aide de ChatGPT.</p>
+  </div>
 
   <script src="script.js"></script>
 </body>
